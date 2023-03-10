@@ -22,4 +22,4 @@
 
 output.*.txt
 compile_commands.json
-dpct_output
+MainSourceFiles.yaml
