@@ -1,8 +1,9 @@
 #! /bin/bash
 
 module purge
-module purge
 module load compiler dpct
+
+mkdir -p ../sycl-bench/build
 
 for src in ../sycl-bench/polybench/*.cpp; do
     echo "[*] Making $src"
@@ -10,7 +11,8 @@ for src in ../sycl-bench/polybench/*.cpp; do
     if [ -f $TARGET ]; then
         echo "[-] $src already built"
     else
-        icpx -fsycl -O3 $src -I../sycl-bench/polybench/common -I../sycl-bench/include \
+        icpx --gcc-toolchain=$(dirname $(which gcc))/.. \
+            -fsycl -O3 $src -I../sycl-bench/polybench/common -I../sycl-bench/include \
             -o $TARGET
     fi
 done

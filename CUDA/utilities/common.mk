@@ -9,7 +9,8 @@ convert:
 	sed -i 's/&deviceProp, GPU_DEVICE/GPU_DEVICE/g' dpct_output/${BASENAME}.dp.cpp
 
 dpct_cpu:
-	icpx -fsycl -O3 dpct_output/${BASENAME}.dp.cpp -I${PATH_TO_UTILS} -o ${BASENAME}.dpct_cpu.exe
+	icpx --gcc-toolchain=$$(dirname $$(which gcc))/.. \
+		-fsycl -O3 -march=native dpct_output/${BASENAME}.dp.cpp -I${PATH_TO_UTILS} -o ${BASENAME}.dpct_cpu.exe
 
 dpct_gpu:
 	clang++ -fsycl -fsycl-targets=nvptx64-nvidia-cuda -Xsycl-target-backend --cuda-gpu-arch=sm_70 \

@@ -4,22 +4,26 @@ import re
 
 with open('results_sycl-bench.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
-    writer.writerow(['bench_name', 'SYCL_CPU', 'SYCL_GPU'])
+    header = ['bench_name', 'SYCL_CPU', 'SYCL_GPU']
     
-    bench_result = []
+    bench_result = header
+    last_name = ""
     for filename in sorted(os.listdir("../sycl-bench/build")):
         
-        if filename.endswith(".sycl_cpu.txt"):
-            bench_result.append(os.path.splitext(os.path.splitext(filename)[0])[0])
+        def test_variant(ext, index):
+            global last_name, bench_result
+            if filename.endswith(ext):
+                bench_name = os.path.splitext(os.path.splitext(filename)[0])[0]
+                if last_name != bench_name:
+                    writer.writerow(bench_result)
+                    bench_result = [bench_name, '', '']
+                    last_name = bench_name
 
-            with open(f"../sycl-bench/build/{filename}") as f:
-                match = re.search(r"run-time-mean: (.+) \[s\]", f.read())
-                bench_result.append(match.group(1))
+                with open(f"../sycl-bench/build/{filename}") as f:
+                    match = re.search(r"run-time-mean: (.+) \[s\]", f.read())
+                    bench_result[index] = match.group(1)
 
-        if filename.endswith(".sycl_gpu.txt"):
-            with open(f"../sycl-bench/build/{filename}") as f:
-                match = re.search(r"run-time-mean: (.+) \[s\]", f.read())
-                bench_result.append(match.group(1))
-        
-            writer.writerow(bench_result)
-            bench_result = []
+        test_variant(".sycl_cpu.txt", 1)
+        test_variant(".sycl_gpu.txt", 2)
+    writer.writerow(bench_result)
+    
