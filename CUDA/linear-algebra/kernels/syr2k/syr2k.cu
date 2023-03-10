@@ -27,7 +27,6 @@
 
 #define GPU_DEVICE 0
 
-#define RUN_ON_CPU
 
 
 void init_arrays(int ni, int nj,

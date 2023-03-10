@@ -32,7 +32,6 @@
 #define ALPHA 43532.0f
 #define BETA 12313.0f
 
-#define RUN_ON_CPU
 
 
 void gesummv(int n, DATA_TYPE alpha, DATA_TYPE beta, DATA_TYPE POLYBENCH_2D(A,N,N,n,n), DATA_TYPE POLYBENCH_2D(B,N,N,n,n), DATA_TYPE POLYBENCH_1D(tmp,N,n),

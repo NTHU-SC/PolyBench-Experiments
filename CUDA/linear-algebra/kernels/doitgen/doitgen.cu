@@ -28,7 +28,6 @@
 
 #define GPU_DEVICE 0
 
-#define RUN_ON_CPU
 
 
 

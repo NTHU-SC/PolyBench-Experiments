@@ -31,7 +31,6 @@
 #define FLOAT_N 3214212.01f
 #define EPS 0.005f
 
-#define RUN_ON_CPU
 
 
 void init_arrays(int m, int n, DATA_TYPE POLYBENCH_2D(data, M, N, m, n))

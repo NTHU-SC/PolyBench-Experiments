@@ -32,7 +32,6 @@
 #define M_PI 3.14159
 #endif
 
-#define RUN_ON_CPU
 
 
 void init_array(int nx, int ny, DATA_TYPE POLYBENCH_1D(x,NX,nx), DATA_TYPE POLYBENCH_2D(A,NX,NY,nx,ny))
