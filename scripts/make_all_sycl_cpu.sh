@@ -1,7 +1,6 @@
 #! /bin/bash
 
-module purge
-module load compiler dpct
+source load_cpu.sh
 
 mkdir -p ../sycl-bench/build
 

@@ -1,12 +1,17 @@
 #! /bin/bash
 
-module purge
-spack load cuda@11.8.0%intel@2021.8.0
+source load_gpu.sh
+
+REPEAT="${REPEAT:- 5}"
 
 for dir in $(cat targets); do
     echo "[*] Running $dir..."
     cd ../CUDA/$dir
-    ./*.cuda.exe | tail | tee output.cuda.txt
+    rm -f output.cuda.txt
+    for i in $(seq $REPEAT); do
+        echo "[-] Run $i for $dir"
+        ./*.cuda.exe | tail | tee -a output.cuda.txt
+    done
     cd -
     sleep 3
 done

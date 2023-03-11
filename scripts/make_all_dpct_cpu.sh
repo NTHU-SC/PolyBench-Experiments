@@ -1,7 +1,6 @@
 #! /bin/bash
 
-module purge
-module load compiler dpct
+source load_cpu.sh
 
 for dir in $(cat targets); do
     make -C ../CUDA/$dir dpct_cpu -j

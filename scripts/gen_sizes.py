@@ -1,6 +1,5 @@
 import os
 import csv
-import glob, os
 
 DATASET = "STANDARD_DATASET"
 

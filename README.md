@@ -1,5 +1,7 @@
 #PolyBench/ACC
 
+> For instructions on running QCT oneAPI experiments, see [README](scripts/README.md) in `scripts`
+
 ###Copyright (c) 2012-2014 University of Delaware
 
 ##Contacts

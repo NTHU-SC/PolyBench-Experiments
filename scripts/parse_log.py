@@ -17,7 +17,12 @@ with open('results.csv', 'w', newline='') as csvfile:
             def get_time(variant):
                 if os.path.isfile(f"../CUDA/{bench}/output.{variant}.txt"):
                     with open(f"../CUDA/{bench}/output.{variant}.txt") as f:
-                        bench_result.append(f.read().splitlines()[-1])
+                        samples = []
+                        for l in f.read().splitlines():
+                            if l.replace('.','',1).isdigit():
+                                samples.append(float(l))
+
+                        bench_result.append(sum(samples) / len(samples))
                 else:
                     bench_result.append("")
             
